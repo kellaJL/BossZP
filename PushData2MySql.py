@@ -3,7 +3,7 @@ import pymysql
 
 
 def pushData_1(data_list):
-    db = pymysql.connect(host='localhost', user='root', passwd='jinlulu666')
+    db = pymysql.connect(host='localhost', user='root', passwd='')
     cur =db.cursor()
     cur.execute('use maoyan;')
     illegalValues=[]
