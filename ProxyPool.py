@@ -4,7 +4,7 @@ import logging
 REQ_TIMEOUT=5
 class Proxy_Pool:
     def __init__(self):
-        self.db = pymysql.connect(host='localhost', user='root', passwd='jinlulu666')
+        self.db = pymysql.connect(host='localhost', user='root', passwd='')
         self.cur = self.db.cursor()
         self.cur.execute('use maoyan;')
 
