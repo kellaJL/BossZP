@@ -24,7 +24,7 @@ import sys,os,time,pymysql
 MYSQL_HOST = 'localhost'
 MYSQL_DBNAME = 'maoyan'
 MYSQL_USER = 'root'
-MYSQL_PASSWD = 'jinlulu666'
+MYSQL_PASSWD = ''
 MYSQL_PORT= 3306
 
 # 此处修改数据库插入修改语句
