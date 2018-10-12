@@ -1,23 +1,23 @@
 #!/usr/bin/env python
 # coding=utf-8
  
-# ½«»ñÈ¡µ½µÄ²úÆ·ĞÅÏ¢´ÓredisÊı¾İ¿â´æµ½mysqlµÄ£ºÊı¾İ¿â'²úÆ·ĞÅÏ¢±í'ÖĞ
+# å°†è·å–åˆ°çš„äº§å“ä¿¡æ¯ä»redisæ•°æ®åº“å­˜åˆ°mysqlçš„ï¼šæ•°æ®åº“'äº§å“ä¿¡æ¯è¡¨'ä¸­
 import json
 import redis
 import pymysql
  
 def main():
-    # Ö¸¶¨redisÊı¾İ¿âĞÅÏ¢
+    # æŒ‡å®šredisæ•°æ®åº“ä¿¡æ¯
     rediscli = redis.StrictRedis(host='localhost',port=6379,db=0)
-    # Ö¸¶¨mysqlÊı¾İ¿â
-    mysqlcli = pymysql.connect(host="localhost",port=3306,user="root",passwd="jinlulu666",db="maoyan",charset="utf8")
+    # æŒ‡å®šmysqlæ•°æ®åº“
+    mysqlcli = pymysql.connect(host="localhost",port=3306,user="root",passwd="",db="maoyan",charset="utf8")
     while True:
-        # ´ÓredisÀïÌáÈ¡Êı¾İ£¬FIFOÄ£Ê½Îª blpop£¬LIFOÄ£Ê½Îª brpop£¬»ñÈ¡¼üÖµ
+        # ä»redisé‡Œæå–æ•°æ®ï¼ŒFIFOæ¨¡å¼ä¸º blpopï¼ŒLIFOæ¨¡å¼ä¸º brpopï¼Œè·å–é”®å€¼
         data = rediscli.lpop("bzp_lsit")
         # item = json.loads(data.decode("utf-8"))
         item = json.loads(data)
         try:
-            # Ê¹ÓÃcursor()·½·¨»ñÈ¡²Ù×÷ÓÎ±ê
+            # ä½¿ç”¨cursor()æ–¹æ³•è·å–æ“ä½œæ¸¸æ ‡
             cursor = mysqlcli.cursor()
             sql = "insert into bzp(job_title,job_red,job_requestion,job_location,job_experience,e_b)VALUES(%s,%s,%s,%s,%s,%s) "
             cursor.execute(sql,[item['job_title'], item['job_red'], item['job_requestion'],
@@ -27,7 +27,7 @@ def main():
     
         except pymysql.Error as e:
             mysqlcli.rollback()
-            print("²åÈëÊı¾İ´íÎó",e)
+            print("æ’å…¥æ•°æ®é”™è¯¯",e)
             # print("Mysql Error %d:%s"%(e.args[0],e.args[1]))
  
 if __name__ == "__main__":
