@@ -23,7 +23,9 @@ class BossZP_Spider:
             'Host': "www.zhipin.com",
             'Pragma': "no-cache",
             'Upgrade-Insecure-Requests': "1",
-            'User-Agent': random.choice(UserAgents.agents)
+            "User-Agent": random.choice(UserAgents.agents),
+            #请求伪造，可以试一下跨站请求伪造CSRF,Referer表示访问请求来源
+            'Referer': 'https://www.zhipin.com/c101280600-p100109/h_101280600/?query=python&page=1&ka=page-1'
         }
         
         pool = redis.ConnectionPool(host='localhost', port=6379)
@@ -106,4 +108,4 @@ class BossZP_Spider:
 
 if __name__=="__main__":
     s=BossZP_Spider()
-    s.main("南京",1)
+    s.main("深圳",1)
